@@ -18,6 +18,17 @@
   },
   "homepage": "https://github.com/jenPlusPlus/build-your-own-backend#readme",
   "dependencies": {
-    "nightmare": "^2.10.0"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "knex": "^0.14.2",
+    "nightmare": "^2.10.0",
+    "pg": "^7.4.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.3",
+    "chai": "^4.1.2",
+    "chai-http": "git+https://github.com/chaijs/chai-http.git#3ea4524",
+    "eslint": "^4.13.1",
+    "mocha": "^4.0.1"
   }
 }
