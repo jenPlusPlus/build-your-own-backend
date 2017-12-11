@@ -6,4 +6,5 @@
 GitHub contributors:
 
 Jen Woodson: @jenPlusPlus
+
 Adam Mescher: @adammescher
