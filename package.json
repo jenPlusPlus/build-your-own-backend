@@ -1,8 +1,8 @@
 {
-  "name": "nfl-scrape",
+  "name": "build-your-own-backend",
   "version": "1.0.0",
   "description": "[![Waffle.io - Issues in progress](https://badge.waffle.io/jenPlusPlus/build-your-own-backend.png?label=in%20progress&title=In%20Progress)](http://waffle.io/jenPlusPlus/build-your-own-backend)",
-  "main": "nfl-players.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
