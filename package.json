@@ -1,0 +1,23 @@
+{
+  "name": "nfl-scrape",
+  "version": "1.0.0",
+  "description": "[![Waffle.io - Issues in progress](https://badge.waffle.io/jenPlusPlus/build-your-own-backend.png?label=in%20progress&title=In%20Progress)](http://waffle.io/jenPlusPlus/build-your-own-backend)",
+  "main": "nfl-players.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jenPlusPlus/build-your-own-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jenPlusPlus/build-your-own-backend/issues"
+  },
+  "homepage": "https://github.com/jenPlusPlus/build-your-own-backend#readme",
+  "dependencies": {
+    "nightmare": "^2.10.0"
+  }
+}
