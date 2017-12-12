@@ -256,6 +256,7 @@ PATCH teams/:id
 { response }
 ```
 
+**************
 
 #### Contributors:
 
