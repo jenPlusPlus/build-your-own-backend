@@ -28,6 +28,7 @@ This API is [REST](https://en.wikipedia.org/wiki/Representational_state_transfer
   * [Player Resources](#player-resources)
     * [`GET` players](#players)
     * [`GET` teams/:id/players](#get-teams/:id/players)
+    * [`GET` players/:id](#get-players/:id)
     * [`GET` teams/:teamID/players/:playerID](#get-teams/:id/players/:id)
     * [`POST` teams/:id/players](#post-teams/:id/players)
     * [`PATCH` teams/:teamID/players/:playerID](#patch-teams/:teamID/players/:playerID)
@@ -189,6 +190,8 @@ PATCH teams/:id
 
 
 *************
+
+#### GET `players/:id`
 
 #### GET `teams/:id/players`
 
