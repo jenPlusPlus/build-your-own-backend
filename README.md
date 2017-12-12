@@ -26,6 +26,7 @@ This API is [REST](https://en.wikipedia.org/wiki/Representational_state_transfer
     * [`PATCH` teams/:id](#patch-teams/:id)
     * [`DELETE` teams/:id](#delete-teams/:id)
   * [Player Resources](#player-resources)
+    * [`GET` players](#players)
     * [`GET` teams/:id/players](#get-teams/:id/players)
     * [`GET` teams/:teamID/players/:playerID](#get-teams/:id/players/:id)
     * [`POST` teams/:id/players](#post-teams/:id/players)
@@ -167,6 +168,27 @@ DELETE teams/:id
 *************
 
 ### Player Resources
+
+#### GET `players`
+
+##### Recognized Values
+* Bullet 1
+* Bullet 2
+
+##### Request
+  
+```
+PATCH teams/:id
+```
+  
+##### Response
+  
+```
+{ response }
+```
+
+
+*************
 
 #### GET `teams/:id/players`
 
