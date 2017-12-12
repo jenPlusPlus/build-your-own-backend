@@ -1,4 +1,4 @@
-const nflPlayers = {
+const teams = {
   "BUF": {
     "city": "buffalo",
     "name": "bills",
@@ -1971,7 +1971,7 @@ const nflPlayers = {
         "weight": "225"
       },
       {
-        "age": "--",
+        "age": "0",
         "college": "Syracuse",
         "experience": "R",
         "height": "5-9",
@@ -4034,7 +4034,7 @@ const nflPlayers = {
         "experience": "1",
         "height": "6-2",
         "name": "Dom Williams",
-        "number": "--",
+        "number": "0",
         "position": "WR",
         "weight": "200"
       },
@@ -4550,7 +4550,7 @@ const nflPlayers = {
         "experience": "2",
         "height": "5-11",
         "name": "Keith Marshall",
-        "number": "--",
+        "number": "0",
         "position": "RB",
         "weight": "222"
       },
@@ -5938,7 +5938,7 @@ const nflPlayers = {
       },
       {
         "age": "26",
-        "college": "--",
+        "college": "",
         "experience": "4",
         "height": "6-7",
         "name": "Demetrius Harris",
@@ -5978,7 +5978,7 @@ const nflPlayers = {
       },
       {
         "age": "26",
-        "college": "--",
+        "college": "",
         "experience": "4",
         "height": "6-5",
         "name": "Laurent Duvernay-Tardif",
@@ -9212,7 +9212,7 @@ const nflPlayers = {
         "experience": "5",
         "height": "5-11",
         "name": "Don Jones",
-        "number": "--",
+        "number": "0",
         "position": "DE",
         "weight": "195"
       },
@@ -12657,12 +12657,12 @@ const nflPlayers = {
         "weight": "197"
       },
       {
-        "age": "--",
+        "age": "0",
         "college": "West Virginia",
         "experience": "R",
         "height": "5-10",
         "name": "Antonio Crawford",
-        "number": "--",
+        "number": "0",
         "position": "CB",
         "weight": "185"
       },
@@ -19263,7 +19263,7 @@ const nflPlayers = {
         "weight": "250"
       },
       {
-        "age": "--",
+        "age": "0",
         "college": "Wisconsin-Platteville",
         "experience": "R",
         "height": "6-6",
@@ -20430,4 +20430,6 @@ const nflPlayers = {
       }
     ]
   }
-}
+};
+
+module.exports = teams;
