@@ -1,10 +1,10 @@
 # Build Your Own Backend
 
+[![Waffle.io - Issues in progress](https://badge.waffle.io/jenPlusPlus/build-your-own-backend.png?label=in%20progress&title=In%20Progress)](http://waffle.io/jenPlusPlus/build-your-own-backend)
+
 [Project Spec](http://frontend.turing.io/projects/build-your-own-backend.html)
 
 [Heroku Deployment]()
-
-[![Waffle.io - Issues in progress](https://badge.waffle.io/jenPlusPlus/build-your-own-backend.png?label=in%20progress&title=In%20Progress)](http://waffle.io/jenPlusPlus/build-your-own-backend)
 
 # API Documentation
 
