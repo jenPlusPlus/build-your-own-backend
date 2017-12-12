@@ -68,7 +68,7 @@ GET teams
 
 *************************
 
-##### GET `teams/:id`
+#### GET `teams/:id`
 
 ##### Recognized Values
   * city - Return team home city via string
@@ -95,7 +95,7 @@ GET teams/:id
 
 ****************
   
-##### POST `teams`
+#### POST `teams`
 
 ##### Recognized Values
 * Bullet 1
@@ -135,7 +135,7 @@ PATCH teams/:id
 
 ***************
   
-##### DELETE `teams/:id`
+#### DELETE `teams/:id`
 
 ##### Recognized Values
 * Bullet 1
@@ -157,26 +157,7 @@ DELETE teams/:id
 
 ### Player Resources
 
-* ##### GET `teams/:id/players`
-##### Recognized Values
-* Bullet 1
-* Bullet 2
-
-##### Request
-  
-```
-PATCH teams/:id
-```
-  
-##### Response
-  
-```
-{ response }
-```
-
-*********
-  
-##### GET `teams/:id/players/:id`
+#### GET `teams/:id/players`
 
 ##### Recognized Values
 * Bullet 1
@@ -195,8 +176,28 @@ PATCH teams/:id
 ```
 
 *********
+  
+#### GET `teams/:id/players/:id`
 
-##### PATCH `teams/:id/players/:id`
+##### Recognized Values
+* Bullet 1
+* Bullet 2
+
+##### Request
+  
+```
+PATCH teams/:id
+```
+  
+##### Response
+  
+```
+{ response }
+```
+
+*********
+
+#### PATCH `teams/:id/players/:id`
 
 ##### Recognized Values
 * Bullet 1
@@ -216,7 +217,7 @@ PATCH teams/:id
 
 **************
 
-##### POST `teams/:id/players`
+#### POST `teams/:id/players`
 
 ##### Recognized Values
 * Bullet 1
@@ -236,7 +237,7 @@ PATCH teams/:id
 
 ***************
 
-##### DELETE `teams/:id/players/:id`
+#### DELETE `teams/:id/players/:id`
 
 ##### Recognized Values
 * Bullet 1
