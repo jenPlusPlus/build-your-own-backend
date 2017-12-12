@@ -36,12 +36,37 @@ app.get('/api/v1/players', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
-app.get('/api/v1/teams/:id/players', (request,response) => {
+app.get('/api/v1/players/:id', (request, response) => {
+  database('players').where('id', request.params.id).select()
+    .then(player => {
+      if(player.length){
+        return response.status(200).json({ player });
+      }
+      return response.status(404).json({ error: `Could not find any player associated with id ${request.params.id}` });
+    })
+    .catch(error => response.status(500).json({ error }));
+});
 
+app.get('/api/v1/teams/:id/players', (request,response) => {
+  database('players').where('team_id', request.params.id).select()
+    .then(players => {
+      if(players.length){
+        return response.status(200).json({ players });
+      }
+      return response.status(404).json({ error: `Could not find any players with a team_id of ${request.params.id}`});
+    })
+    .catch(error => response.status(500).json({ error }));
 });
 
 app.get('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
-
+  database('players').where('team_id', request.params.teamID).where('id', request.params.playerID).select()
+    .then(player => {
+      if(player.length){
+        return response.status(200).json({ player });
+      }
+      return response.status(404).json({ error: `Could not find any player associated with team_id ${request.params.teamID} and id ${request.params.playerID}` });
+    })
+    .catch(error => response.status(500).json({ error }));
 });
 
 // generic errors
