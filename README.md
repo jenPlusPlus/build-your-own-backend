@@ -18,15 +18,15 @@ This API is [REST](https://en.wikipedia.org/wiki/Representational_state_transfer
   * [Team Resources](#team-resources)
     * [`GET` teams](#get-teams)
     * [`GET` teams/:id](#get-teams/:id)
-    * [`POST` teams](#)
-    * [`PATCH` teams/:id](#)
-    * [`DELETE` teams/:id](#)
+    * [`POST` teams](#post-teams)
+    * [`PATCH` teams/:id](#patch-teams/:id)
+    * [`DELETE` teams/:id](#delete-teams/:id)
   * [Player Resources](#player-resources)
-    * [`GET` teams/:id/players](#)
-    * [`GET` teams/:teamID/players:playerID](#)
-    * [`POST` teams/:id/players](#)
-    * [`PATCH` teams/:teamID/players/:playerID](#)
-    * [`DELETE` teams/:teamID/players/playerID](#)
+    * [`GET` teams/:id/players](#get-teams/:id/players)
+    * [`GET` teams/:teamID/players/:playerID](#get-teams/:id/players/:id)
+    * [`POST` teams/:id/players](#post-teams/:id/players)
+    * [`PATCH` teams/:teamID/players/:playerID](#patch-teams:teamID/players/:playerID)
+    * [`DELETE` teams/:teamID/players/playerID](#delete-teams:/teamID/players/:playerID)
     
 **************
 
