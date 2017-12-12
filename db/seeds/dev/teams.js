@@ -10,19 +10,6 @@ const createTeam = (knex, team) => {
       let playerPromises = [];
 
       team.players.forEach( (player, index) => {
-        if ( isNaN(player.number)) {
-          console.log(player);
-        }
-
-        if ( isNaN(player.age)){
-          console.log(player);
-        }
-
-        if (isNaN(player.weight)) {
-          console.log(player);
-        }
-
-
         playerPromises.push(
           createPlayer(knex, {
             team_id: teamID[0],
@@ -50,7 +37,6 @@ exports.seed = (knex, Promise) => {
   return knex('players').del()
     .then(() => knex('teams').del() )
       .then(() => {
-        console.log('TEAMS TABLE DELETED');
         let teamPromises = [];
 
         teamAbbreviations.forEach( abbreviation => {
