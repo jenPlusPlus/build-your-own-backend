@@ -17,7 +17,7 @@ This API is [REST](https://en.wikipedia.org/wiki/Representational_state_transfer
 * [Endpoints](#endpoints)
   * [Team Resources](#team-resources)
     * [`GET` teams](#get-teams)
-    * [`GET` teams/:id](#get-teams)
+    * [`GET` teams/:id](#get-teams/:id)
     * [`POST` teams](#)
     * [`PATCH` teams/:id](#)
     * [`DELETE` teams/:id](#)
