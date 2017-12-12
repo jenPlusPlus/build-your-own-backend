@@ -258,6 +258,8 @@ PATCH teams/:id
 
 #### GitHub contributors:
 
-Jen Woodson: @jenPlusPlus
+Jen Woodson: 
+* GitHub: [@jenPlusPlus](https://github.com/jenPlusPlus)
 
-Adam Mescher: @adammescher
+Adam Mescher: 
+* GitHub: [@adammescher](https://github.com/adammescher)
