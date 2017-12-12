@@ -45,7 +45,7 @@ This API is [REST](https://en.wikipedia.org/wiki/Representational_state_transfer
 
 Description text goes here
 
-##### Recognized Values
+##### Parameters
   
 * city — Return team home city via string
 * name — Return team name via string
