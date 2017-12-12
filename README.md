@@ -256,10 +256,10 @@ PATCH teams/:id
 ```
 
 
-#### GitHub contributors:
+#### Contributors:
 
-Jen Woodson: 
+##### Jen Woodson: 
 * GitHub: [@jenPlusPlus](https://github.com/jenPlusPlus)
 
-Adam Mescher: 
+##### Adam Mescher: 
 * GitHub: [@adammescher](https://github.com/adammescher)
