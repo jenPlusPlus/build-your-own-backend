@@ -69,6 +69,31 @@ app.get('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
+app.post('/api/v1/teams/:id/players', (request, response) => {
+  let player = request.body;
+  const id = request.params.id;
+
+  for (let requiredParameter of ['number', 'name', 'position', 'age', 'height', 'weight', 'experience', 'college']) {
+    if (!player[requiredParameter]) {
+      return response.status(422).json({ error: `You are missing the '${requiredParameter}' property` });
+    };
+  };
+
+  if(player.number < 0){
+   return response.status(422).json({ error: `number must be a positive number` });
+  } else if (player.age < 0) {
+    return response.status(422).json({ error: `age must be a positive number` });
+  } else if (player.weight < 0) {
+    return response.status(422).json({ error: `weight must be a positive number` });
+  }
+
+  player = Object.assign({}, player, { team_id: id });
+
+  database('players').insert(player, 'id')
+    .then(player => response.status(201).json({ player }))
+    .catch(error => response.status(500).json({ error }))
+});
+
 // generic errors
 
 app.use(function (request, response, next) {
