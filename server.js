@@ -24,10 +24,6 @@ app.get('/api/v1/teams', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
-app.get('/api/v1/teams/:id', (request, response) => {
-
-});
-
 // player resources
 
 app.get('/api/v1/players', (request, response) => {
@@ -76,7 +72,7 @@ app.post('/api/v1/teams/:id/players', (request, response) => {
   for (let requiredParameter of ['number', 'name', 'position', 'age', 'height', 'weight', 'experience', 'college']) {
     if (!player[requiredParameter]) {
       return response.status(422).json({ error: `You are missing the '${requiredParameter}' property` });
-    }; 
+    };
   };
 
   if(player.number < 0){
@@ -131,4 +127,8 @@ app.use(function (error, request, response, next) {
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}`);
+<<<<<<< HEAD
 })
+=======
+});
+>>>>>>> Add GET endpoint for specific team
