@@ -76,7 +76,7 @@ app.post('/api/v1/teams/:id/players', (request, response) => {
   for (let requiredParameter of ['number', 'name', 'position', 'age', 'height', 'weight', 'experience', 'college']) {
     if (!player[requiredParameter]) {
       return response.status(422).json({ error: `You are missing the '${requiredParameter}' property` });
-    };
+    }; 
   };
 
   if(player.number < 0){
@@ -94,6 +94,30 @@ app.post('/api/v1/teams/:id/players', (request, response) => {
     .catch(error => response.status(500).json({ error }))
 });
 
+app.patch('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
+  const teamID = request.params.teamID;
+  const playerID = request.params.playerID;
+  const body = request.body;
+
+  database('players').where('id', playerID).update(body, '*')
+    .then(player => {
+      if (!player.length) {
+        return response.status(404).json({ error: `Could not find any player associated with team_id ${request.params.teamID} and id ${request.params.playerID}` });
+      }
+      return response.status(202).json({ player: player[0] });
+    })
+    .catch(error => response.status(500).json({ error }));
+})
+
+app.delete('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
+  const teamID = request.params.teamID;
+  const playerID = request.params.playerID;
+
+  database('players').where('id', playerID).del()
+    .then(() => response.status(204).json({ playerID }))
+    .catch(error => response.status(404).json({error: `Could not find player with id '${playerID}'`}));
+});
+
 // generic errors
 
 app.use(function (request, response, next) {
@@ -107,5 +131,4 @@ app.use(function (error, request, response, next) {
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}`);
-});
-
+})
