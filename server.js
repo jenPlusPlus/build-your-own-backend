@@ -24,6 +24,19 @@ app.get('/api/v1/teams', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
+app.post('/api/v1/teams', (request, response) => {
+  const team = request.body;
+  for (var requiredParameter of ['name']) {
+    if (!team[requiredParameter]) {
+      return response.status(422).json({ error: `You are missing the '${requiredParameter}' property` });
+    }
+  }
+
+  database('teams').insert(team, ['id', 'name'])
+    .then(team => response.status(201).json({ team }))
+    .catch(error => response.status(500).json({ error }));
+});
+
 // player resources
 
 app.get('/api/v1/players', (request, response) => {
