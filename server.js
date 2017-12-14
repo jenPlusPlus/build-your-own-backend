@@ -18,24 +18,40 @@ const database = require('knex')(configuration);
 
 const checkAuth = (request, response, next) => {
   const token = request.body.token || request.query.token || request.headers['x-access-token'];
+
   if(!token) {
     return response.status(403).json({error: 'You must be authorized to access this endpoint.'});
   } else {
-    const verified = jwt.verify(token, secretKey)
+    const verified = jwt.verify(token, app.get('secretKey'))
 
-    if (verified) {
+    if (verified.admin) {
       next();
     } else {
-      return response.status(403).json({error: 'Invalid token.'})
+      return response.status(403).json({error: 'You must be authorized to access this endpoint.'})
     }
   }
 }
+
+app.post('/authenticate', (request, response) => {
+  const { email, appName } = request.body;
+
+  // rendundant check for required parameters
+  for (let requiredParameter of ['email', 'appName']) {
+    if (!request.body[requiredParameter]) {
+      return response.status(422).json({ error: `You are missing the '${requiredParameter}' property` });
+    };
+  };
+
+  const admin = email.endsWith('@turing.io');
+  const token = jwt.sign({ admin }, app.get('secretKey'));
+  return response.status(200).json({ token });
+});
 
 app.get('/', (request, response) => {
   response.send('it works!!');
 });
 
-app.get('/api/v1/teams', (request, response) => {
+app.get('/api/v1/teams', checkAuth, (request, response) => {
   const queryParameter = Object.keys(request.query)[0];
   const queryParameterValue = request.query[queryParameter];
 
