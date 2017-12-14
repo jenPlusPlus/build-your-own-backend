@@ -200,7 +200,7 @@ Remove team from database and server returns HTTP status code`204: No Content`
 ##### Request
   
 ```
-DELETE teams/:id
+DELETE teams/:1708
 ```
   
 ##### Response
