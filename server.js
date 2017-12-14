@@ -93,16 +93,16 @@ app.get('/api/v1/players', (request, response) => {
     database('players').select()
       .then(players => response.status(200).json({ players }))
       .catch(error => response.status(500).json({ error }));
+  } else {
+    database('players').where(queryParameter, queryParameterValue).select()
+      .then(player => {
+        if(!player.length){
+          return response.status(404).json({ error: `Could not find any player associated with '${queryParameter}' of '${queryParameterValue}'` });
+        }
+        return response.status(200).json({ player });
+      })
+      .catch(error => response.status(500).json({ error }));
   }
-
-  database('players').where(queryParameter, queryParameterValue).select()
-    .then(player => {
-      if(!player.length){
-        return response.status(404).json({ error: `Could not find any player associated with '${queryParameter}' of '${queryParameterValue}'` });
-      }
-      return response.status(200).json({ player });
-    })
-    .catch(error => response.status(500).json({ error }));
 });
 
 app.get('/api/v1/players/:id', (request, response) => {
