@@ -43,10 +43,7 @@ const requestToken = (event) => {
       },
       // eslint-disable-next-line
       body: { email: email, appName: name },
-    }).then(response => {
-      console.log('response: ', response);
-      return response.json();
-    })
+    }).then(response => response.json())
       .then(parsedResponse => displayToken(parsedResponse.token))
       .catch(error => console.error({ error }));
   }
