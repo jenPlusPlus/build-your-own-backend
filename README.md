@@ -105,7 +105,7 @@ GET teams/1705
   
 ```
 {
-  "team": [
+  "team":
    {
     "id": 1705,
     "city": "new york",
@@ -113,7 +113,6 @@ GET teams/1705
     "created_at": "2017-12-12T21:25:15.653Z",
     "updated_at": "2017-12-12T21:25:15.653Z"
    }
-  ]
 }
 ```
 
