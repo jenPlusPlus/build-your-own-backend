@@ -1,4 +1,3 @@
-/* eslint-disable */
 // /* eslint no-plusplus: 0 */
 // /* eslint no-console: 0 */
 
@@ -43,7 +42,7 @@ const requestToken = (event) => {
         'Content-Type': 'application/json',
       },
       // eslint-disable-next-line
-      body: { email: email, appName: name },
+      body: JSON.stringify({ email: email, appName: name }),
     }).then(response => response.json())
       .then(parsedResponse => displayToken(parsedResponse.token))
       .catch(error => console.error({ error }));
