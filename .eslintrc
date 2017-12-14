@@ -3,5 +3,6 @@
   "env": {
     "jquery": true,
     "browser": true,
+    "mocha": true,
   },
 }
