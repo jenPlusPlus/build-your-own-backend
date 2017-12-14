@@ -51,7 +51,7 @@ app.get('/', (request, response) => {
   response.send('it works!!');
 });
 
-app.get('/api/v1/teams', checkAuth, (request, response) => {
+app.get('/api/v1/teams', (request, response) => {
   const queryParameter = Object.keys(request.query)[0];
   const queryParameterValue = request.query[queryParameter];
 
