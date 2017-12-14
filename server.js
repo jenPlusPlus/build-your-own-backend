@@ -24,16 +24,16 @@ app.get('/api/v1/teams', (request, response) => {
     database('teams').select()
       .then(teams => response.status(200).json({ teams }))
       .catch(error => response.status(500).json({ error }));
+  } else {
+    database('teams').where(queryParameter, queryParameterValue).select()
+      .then(team => {
+        if(!team.length){
+          return response.status(404).json({ error: `Could not find any team associated with '${queryParameter}' of '${queryParameterValue}'` });
+        }
+        return response.status(200).json({ team });
+      })
+      .catch(error => response.status(500).json({ error }));
   }
-
-  database('teams').where(queryParameter, queryParameterValue).select()
-    .then(team => {
-      if(!team.length){
-        return response.status(404).json({ error: `Could not find any team associated with '${queryParameter}' of '${queryParameterValue}'` });
-      }
-      return response.status(200).json({ team });
-    })
-    .catch(error => response.status(500).json({ error }));
 });
 
 app.get('/api/v1/teams/:id', (request, response) => {
