@@ -135,8 +135,10 @@ Create a new team and returns the id of the created team as integer via JSON.
 
 ##### Essential Information:
 
-* city - *string*: City of created team
-* name - *string*: Name of created team
+| parameter  | data type | description |
+|------------|-----------|-------------|
+| city       | string    |             |
+| name       | string    |             |
 
 ##### Request
   
@@ -167,8 +169,10 @@ Edit team name and city by passing JSON and returns edited team as object via JS
 
 ##### Potential Information: 
 
-* city - *string*: City of created team
-* name - *string*: Name of created team
+| parameter  | data type | description |
+|------------|-----------|-------------|
+| city       | string    |             |
+| name       | string    |             |
 
 ##### Request
   
