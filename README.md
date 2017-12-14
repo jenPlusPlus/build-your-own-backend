@@ -284,7 +284,7 @@ Returns one player with given unique id as object via JSON
 ##### Request
   
 ```
-GET teams/22396
+GET players/22396
 ```
   
 ##### Response
@@ -313,8 +313,18 @@ GET teams/22396
 #### GET `teams/:id/players`
 
 ##### Recognized Values
-* Bullet 1
-* Bullet 2
+
+| parameter | data type | description |
+|------------|-----------|-------------|
+| id         | integer   |             |
+| team_id    | integer   |             |
+| name       | string    |             |
+| position   | string    |             |
+| age        | number    |             |
+| height     | string    |             |
+| weight     | integer   |             |
+| experience | string    |             |
+| college    | string    |             |
 
 ##### Request
   
@@ -332,9 +342,21 @@ PATCH teams/:id
   
 #### GET `teams/:id/players/:id`
 
+##### Description
+
 ##### Recognized Values
-* Bullet 1
-* Bullet 2
+
+| parameter | data type | description |
+|------------|-----------|-------------|
+| id         | integer   |             |
+| team_id    | integer   |             |
+| name       | string    |             |
+| position   | string    |             |
+| age        | number    |             |
+| height     | string    |             |
+| weight     | integer   |             |
+| experience | string    |             |
+| college    | string    |             |
 
 ##### Request
   
@@ -352,9 +374,21 @@ PATCH teams/:id
 
 #### PATCH `teams/:id/players/:id`
 
+##### Description
+
 ##### Recognized Values
-* Bullet 1
-* Bullet 2
+
+| parameter | data type | description |
+|------------|-----------|-------------|
+| id         | integer   |             |
+| team_id    | integer   |             |
+| name       | string    |             |
+| position   | string    |             |
+| age        | number    |             |
+| height     | string    |             |
+| weight     | integer   |             |
+| experience | string    |             |
+| college    | string    |             |
 
 ##### Request
   
@@ -373,8 +407,18 @@ PATCH teams/:id
 #### POST `teams/:id/players`
 
 ##### Recognized Values
-* Bullet 1
-* Bullet 2
+
+| parameter | data type | description |
+|------------|-----------|-------------|
+| id         | integer   |             |
+| team_id    | integer   |             |
+| name       | string    |             |
+| position   | string    |             |
+| age        | number    |             |
+| height     | string    |             |
+| weight     | integer   |             |
+| experience | string    |             |
+| college    | string    |             |
 
 ##### Request
   
@@ -392,9 +436,7 @@ PATCH teams/:id
 
 #### DELETE `teams/:id/players/:id`
 
-##### Recognized Values
-* Bullet 1
-* Bullet 2
+##### Description
 
 ##### Request
   
