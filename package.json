@@ -4,7 +4,8 @@
   "description": "[![Waffle.io - Issues in progress](https://badge.waffle.io/jenPlusPlus/build-your-own-backend.png?label=in%20progress&title=In%20Progress)](http://waffle.io/jenPlusPlus/build-your-own-backend)",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha --exit"
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --exit",
+    "lint": "./node_modules/.bin/eslint ./db/. ./public/. ./scrape/. ./test/."
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,8 @@
     "chai": "^4.1.2",
     "chai-http": "git+https://github.com/chaijs/chai-http.git#3ea4524",
     "eslint": "^4.13.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
     "mocha": "^4.0.1"
   }
 }

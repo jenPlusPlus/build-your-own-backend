@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const teams = {
   "BUF": {
     "city": "buffalo",
@@ -7025,7 +7027,7 @@ const teams = {
     ]
   },
   "OAK": {
-    "city": "oakland", 
+    "city": "oakland",
     "name": "raiders",
     "players": [
       {
@@ -10256,7 +10258,7 @@ const teams = {
   },
   "BAL": {
     "city": "baltimore",
-    "name": "ravens", 
+    "name": "ravens",
     "players": [
       {
         "age": "32",
