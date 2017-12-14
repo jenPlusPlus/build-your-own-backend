@@ -16,11 +16,23 @@ app.get('/', (request, response) => {
   response.send('it works!!');
 });
 
-// team resources
-
 app.get('/api/v1/teams', (request, response) => {
-  database('teams').select()
-    .then(teams => response.status(200).json({ teams }))
+  const queryParameter = Object.keys(request.query)[0];
+  const queryParameterValue = request.query[queryParameter];
+  
+  if (!queryParameter) {
+    database('teams').select()
+      .then(teams => response.status(200).json({ teams }))
+      .catch(error => response.status(500).json({ error }));
+  }
+
+  database('teams').where(queryParameter, queryParameterValue).select()
+    .then(team => {
+      if(!team.length){
+        return response.status(404).json({ error: `Could not find any team associated with '${queryParameter}' of '${queryParameterValue}'` });
+      }
+      return response.status(200).json({ team });
+    })
     .catch(error => response.status(500).json({ error }));
 });
 
@@ -73,11 +85,23 @@ app.delete('/api/v1/teams/:id', (request, response) => {
     .catch(error => response.status(404).json({error: `Could not find team with id '${teamID}'`}));
 });
 
-// player resources
-
 app.get('/api/v1/players', (request, response) => {
-  database('players').select()
-    .then(players => response.status(200).json({ players }))
+  const queryParameter = Object.keys(request.query)[0];
+  const queryParameterValue = request.query[queryParameter];
+
+  if(!queryParameter){
+    database('players').select()
+      .then(players => response.status(200).json({ players }))
+      .catch(error => response.status(500).json({ error }));
+  }
+
+  database('players').where(queryParameter, queryParameterValue).select()
+    .then(player => {
+      if(!player.length){
+        return response.status(404).json({ error: `Could not find any player associated with '${queryParameter}' of '${queryParameterValue}'` });
+      }
+      return response.status(200).json({ player });
+    })
     .catch(error => response.status(500).json({ error }));
 });
 
@@ -162,8 +186,6 @@ app.delete('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
     .then(() => response.status(204).json({ playerID }))
     .catch(error => response.status(404).json({error: `Could not find player with id '${playerID}'`}));
 });
-
-// generic errors
 
 app.use(function (request, response, next) {
   response.status(404).send("404: Sorry can't find that!")
