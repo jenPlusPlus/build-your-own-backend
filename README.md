@@ -90,6 +90,10 @@ none
 
 #### GET `teams/:id`
 
+##### Description
+
+Returns one team with given unique id as an object.
+
 ##### Recognized Values
   * city - Return team home city via string
   * name - Return team name via string
