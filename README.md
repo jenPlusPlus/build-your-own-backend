@@ -215,9 +215,23 @@ DELETE teams/:1708
 
 #### GET `players`
 
-##### Recognized Values
-* Bullet 1
-* Bullet 2
+##### Description
+
+Returns all players as array of player objects via JSON.
+
+##### Parameters
+
+| parameters | data type | description |
+|------------|-----------|-------------|
+| id         | integer   |             |
+| team_id    | integer   |             |
+| name       | string    |             |
+| position   | string    |             |
+| age        | number    |             |
+| height     | string    |             |
+| weight     | integer   |             |
+| experience | string    |             |
+| college    | string    |             |
 
 ##### Request
   
