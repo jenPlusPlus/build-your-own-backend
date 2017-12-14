@@ -1,5 +1,6 @@
-/* eslint no-plusplus: 0 */
-/* eslint no-console: 0 */
+/* eslint-disable */
+// /* eslint no-plusplus: 0 */
+// /* eslint no-console: 0 */
 
 const displayToken = (token) => {
   $('#token-container').append(`<p>Your token is <span id='token'>${token}</span></p>`);
