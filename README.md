@@ -45,7 +45,7 @@ This API is [REST](https://en.wikipedia.org/wiki/Representational_state_transfer
 
 ##### Description
 
-Description text goes here
+Returns all teams as objects in `teams` array.
 
 ##### Parameters
 
