@@ -97,7 +97,7 @@ describe('API Routes', () => {
         response.should.be.json;
         response.body.should.be.an('object');
         response.body.should.have.property('error');
-        response.body.error.should.equal('Could not find any team associated with "city" of "dayton"');
+        response.body.error.should.equal("Could not find any team associated with 'city' of 'dayton'");
       })
       .catch((error) => {
         throw error;
