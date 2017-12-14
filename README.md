@@ -49,9 +49,11 @@ Returns all teams as objects in `teams` array as JSON.
 
 ##### Parameters
 
-* id — Return unique team id
-* city — Return team home city via string
-* name — Return team name via string
+| parameters | data type | description |
+|------------|-----------|-------------|
+| id         | integer   |             |
+| city       | string    |             |
+| name       | string    |             |
   
 ##### Request
   
@@ -95,9 +97,12 @@ none
 Returns one team with given unique id as an object as JSON.
 
 ##### Recognized Values
-  * city - Return team home city via string
-  * name - Return team name via string
-  * players - Returns team players via array of player objects
+
+| parameters | data type | description |
+|------------|-----------|-------------|
+| id         | integer   |             |
+| city       | string    |             |
+| name       | string    |             |
   
 ##### Request
   
