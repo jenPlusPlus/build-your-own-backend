@@ -19,20 +19,44 @@ app.get('/', (request, response) => {
 // team resources
 
 app.get('/api/v1/teams', (request, response) => {
-  database('teams').select()
-    .then(teams => response.status(200).json({ teams }))
+  const queryParameter = Object.keys(request.query)[0];
+  const queryParameterValue = request.query[queryParameter];
+
+  if (!queryParameter) {
+    database('teams').select()
+      .then(teams => response.status(200).json({ teams }))
+      .catch(error => response.status(500).json({ error }));
+  }
+
+  database('teams').where(queryParameter, queryParameterValue).select()
+    .then(team => {
+      if(!team.length){
+        return response.status(404).json({ error: `Could not find any team associated with '${queryParameter}' of '${queryParameterValue}'` });
+      }
+      return response.status(200).json({ team });
+    })
     .catch(error => response.status(500).json({ error }));
-});
-
-app.get('/api/v1/teams/:id', (request, response) => {
-
 });
 
 // player resources
 
 app.get('/api/v1/players', (request, response) => {
-  database('players').select()
-    .then(players => response.status(200).json({ players }))
+  const queryParameter = Object.keys(request.query)[0];
+  const queryParameterValue = request.query[queryParameter];
+
+  if(!queryParameter){
+    database('players').select()
+      .then(players => response.status(200).json({ players }))
+      .catch(error => response.status(500).json({ error }));
+  }
+
+  database('players').where(queryParameter, queryParameterValue).select()
+    .then(player => {
+      if(!player.length){
+        return response.status(404).json({ error: `Could not find any player associated with '${queryParameter}' of '${queryParameterValue}'` });
+      }
+      return response.status(200).json({ player });
+    })
     .catch(error => response.status(500).json({ error }));
 });
 
