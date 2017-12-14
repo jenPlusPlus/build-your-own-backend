@@ -48,10 +48,10 @@ This API is [REST](https://en.wikipedia.org/wiki/Representational_state_transfer
 Description text goes here
 
 ##### Parameters
-  
+
+* id — Return unique team id
 * city — Return team home city via string
 * name — Return team name via string
-* players - Returns team players via array of player objects
   
 ##### Request
   
