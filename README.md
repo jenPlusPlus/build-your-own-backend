@@ -45,7 +45,7 @@ This API is [REST](https://en.wikipedia.org/wiki/Representational_state_transfer
 
 ##### Description
 
-Returns all teams as objects in `teams` array.
+Returns all teams as objects in `teams` array as JSON.
 
 ##### Parameters
 
@@ -92,7 +92,7 @@ none
 
 ##### Description
 
-Returns one team with given unique id as an object.
+Returns one team with given unique id as an object as JSON.
 
 ##### Recognized Values
   * city - Return team home city via string
@@ -124,20 +124,32 @@ GET teams/1705
   
 #### POST `teams`
 
-##### Recognized Values
-* Bullet 1
-* Bullet 2
+##### Description
+
+Create a new team and receive the id of the created team as JSON.
+
+##### Essential Information:
+
+* city - *string*: City of created team
+* name - *string*: Name of created team
 
 ##### Request
   
 ```
 POST teams
+
+body: {
+ "city": "dayton"
+ "name": "triangles"
+}
 ```
   
 ##### Response
   
 ```
-{ response }
+{
+    "team": 1735
+}
 ```
 
 ****************
