@@ -49,10 +49,6 @@ app.post('/api/v1/authenticate', (request, response) => {
   return response.status(200).json({ token });
 });
 
-app.get('/', (request, response) => {
-  response.send('it works!!');
-});
-
 app.get('/api/v1/teams', (request, response) => {
   const queryParameter = Object.keys(request.query)[0];
   const queryParameterValue = request.query[queryParameter];
