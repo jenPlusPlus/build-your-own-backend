@@ -41,8 +41,12 @@ const requestToken = (event) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, appName: name }),
-    }).then(response => response.json())
+      // eslint-disable-next-line
+      body: { email: email, appName: name },
+    }).then(response => {
+      console.log('response: ', response);
+      return response.json();
+    })
       .then(parsedResponse => displayToken(parsedResponse.token))
       .catch(error => console.error({ error }));
   }
