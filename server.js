@@ -73,7 +73,7 @@ app.get('/api/v1/teams/:id', (request, response) => {
   database('teams').where('id', request.params.id).select()
     .then(team => {
       if(team.length){
-        return response.status(200).json({ team });
+        return response.status(200).json({ team: team[0] });
       }
       return response.status(404).json({ error: `Could not find any team associated with id ${request.params.id}` });
     })
@@ -90,7 +90,7 @@ app.post('/api/v1/teams', checkAuth, (request, response) => {
   };
 
   database('teams').insert(team, 'id')
-    .then(team => response.status(201).json({ team }))
+    .then(team => response.status(201).json({ id: team[0] }))
     .catch(error => response.status(500).json({ error }))
 });
 
@@ -140,7 +140,7 @@ app.get('/api/v1/players/:id', (request, response) => {
   database('players').where('id', request.params.id).select()
     .then(player => {
       if(player.length){
-        return response.status(200).json({ player });
+        return response.status(200).json({ player: player[0] });
       }
       return response.status(404).json({ error: `Could not find any player associated with id ${request.params.id}` });
     })
