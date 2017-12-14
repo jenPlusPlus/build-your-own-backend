@@ -126,7 +126,7 @@ GET teams/1705
 
 ##### Description
 
-Create a new team and receive the id of the created team as JSON.
+Create a new team and returns the id of the created team as integer via JSON.
 
 ##### Essential Information:
 
@@ -148,7 +148,7 @@ body: {
   
 ```
 {
-    "team": 1735
+  "id": 1735
 }
 ```
 
@@ -156,20 +156,37 @@ body: {
   
 ##### PATCH `teams/:id`
 
-##### Recognized Values
-* Bullet 1
-* Bullet 2
+##### Description
+
+Edit team name and city by passing JSON and returns edited team as object via JSON. 
+
+##### Potential Information: 
+
+* city - *string*: City of created team
+* name - *string*: Name of created team
 
 ##### Request
   
 ```
-PATCH teams/:id
+PATCH teams/1715
+
+body: {
+  "city": "las vegas" 
+}
 ```
   
 ##### Response
   
 ```
-{ response }
+{
+    "team": {
+        "id": 1715,
+        "city": "las vegas",
+        "name": "raiders",
+        "created_at": "2017-12-12T21:25:15.683Z",
+        "updated_at": "2017-12-12T21:25:15.683Z"
+    }
+}
 ```
 
 ***************
