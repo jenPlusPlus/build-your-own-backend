@@ -128,8 +128,32 @@ describe('API Routes', () => {
     .then(response => {
       response.should.have.status(200);
       response.should.be.json;
+      response.body.should.have.property('players');
+      response.body.players.should.be.an('array');
+      response.body.players.length.should.equal(1);
+      response.body.players[0].should.be.an('object');
+      response.body.players[0].should.have.property('id');
+      response.body.players[0].id.should.be.a('number');
+      response.body.players[0].should.have.property('team_id');
+      response.body.players[0].team_id.should.be.a('number');
+      response.body.players[0].should.have.property('name');
+      response.body.players[0].name.should.be.a('string');
+      response.body.players[0].should.have.property('position');
+      response.body.players[0].position.should.be.a('string');
+      response.body.players[0].should.have.property('age');
+      response.body.players[0].age.should.be.a('number');
+      response.body.players[0].should.have.property('height');
+      response.body.players[0].height.should.be.a('string');
+      response.body.players[0].should.have.property('weight');
+      response.body.players[0].weight.should.be.a('number');
+      response.body.players[0].should.have.property('experience');
+      response.body.players[0].experience.should.be.a('string');
+      response.body.players[0].should.have.property('college');
+      response.body.players[0].college.should.be.a('string');
     })
-    
+    .catch(error => {
+      throw error;
+    })
   });
   describe('POST /api/v1/teams/:id/players', () => {
     
