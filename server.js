@@ -25,7 +25,52 @@ app.get('/api/v1/teams', (request, response) => {
 });
 
 app.get('/api/v1/teams/:id', (request, response) => {
+  database('teams').where('id', request.params.id).select()
+    .then(team => {
+      if(team.length){
+        return response.status(200).json({ team });
+      }
+      return response.status(404).json({ error: `Could not find any team associated with id ${request.params.id}` });
+    })
+    .catch(error => response.status(500).json({ error }));
+});
 
+app.post('/api/v1/teams', (request, response) => {
+  let team = request.body;
+
+  for (let requiredParameter of ['city', 'name']) {
+    if (!team[requiredParameter]) {
+      return response.status(422).json({ error: `You are missing the '${requiredParameter}' property` });
+    };
+  };
+
+  database('teams').insert(team, 'id')
+    .then(team => response.status(201).json({ team }))
+    .catch(error => response.status(500).json({ error }))
+});
+
+app.patch('/api/v1/teams/:id', (request, response) => {
+  const teamID = request.params.id;
+  const body = request.body;
+
+  database('teams').where('id', teamID).update(body, '*')
+    .then(team => {
+      if (!team.length) {
+        return response.status(404).json({ error: `Could not find any team associated with team_id ${request.params.id}` });
+      }
+      return response.status(202).json({ team: team[0] });
+    })
+    .catch(error => response.status(500).json({ error }));
+})
+
+app.delete('/api/v1/teams/:id', (request, response) => {
+  const teamID = request.params.id;
+
+  database('teams').where('id', teamID).del()
+    .then(() => {
+      return response.status(204).json({ teamID });
+    })
+    .catch(error => response.status(404).json({error: `Could not find team with id '${teamID}'`}));
 });
 
 // player resources
@@ -76,7 +121,7 @@ app.post('/api/v1/teams/:id/players', (request, response) => {
   for (let requiredParameter of ['number', 'name', 'position', 'age', 'height', 'weight', 'experience', 'college']) {
     if (!player[requiredParameter]) {
       return response.status(422).json({ error: `You are missing the '${requiredParameter}' property` });
-    }; 
+    };
   };
 
   if(player.number < 0){
@@ -131,4 +176,4 @@ app.use(function (error, request, response, next) {
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}`);
-})
+});
