@@ -79,9 +79,7 @@ app.delete('/api/v1/teams/:id', (request, response) => {
   const teamID = request.params.id;
 
   database('teams').where('id', teamID).del()
-    .then(() => {
-      return response.status(204).json({ teamID });
-    })
+    .then(() => response.status(204).json({ teamID }))
     .catch(error => response.status(404).json({error: `Could not find team with id '${teamID}'`}));
 });
 
@@ -164,8 +162,7 @@ app.post('/api/v1/teams/:id/players', (request, response) => {
 });
 
 app.patch('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
-  const teamID = request.params.teamID;
-  const playerID = request.params.playerID;
+  const { teamID, playerID } = request.params;
   const body = request.body;
 
   database('players').where('id', playerID).update(body, '*')
@@ -179,8 +176,7 @@ app.patch('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
 })
 
 app.delete('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
-  const teamID = request.params.teamID;
-  const playerID = request.params.playerID;
+  const { teamID, playerID } = request.params;
 
   database('players').where('id', playerID).del()
     .then(() => response.status(204).json({ playerID }))
@@ -188,12 +184,12 @@ app.delete('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
 });
 
 app.use(function (request, response, next) {
-  response.status(404).send("404: Sorry can't find that!")
+  return response.status(404).send("404: Sorry can't find that!");
 });
 
 app.use(function (error, request, response, next) {
-  console.error(error.stack)
-  response.status(500).send('Something broke!')
+  console.error(error.stack);
+  return response.status(500).send('Something broke!');
 });
 
 app.listen(app.get('port'), () => {
