@@ -81,7 +81,8 @@ app.get('/api/v1/teams/:id', (request, response) => {
 });
 
 app.post('/api/v1/teams', checkAuth, (request, response) => {
-  let team = request.body;
+  let { name, city } = request.body;
+  let team = { name, city };
 
   for (let requiredParameter of ['city', 'name']) {
     if (!team[requiredParameter]) {
@@ -96,7 +97,8 @@ app.post('/api/v1/teams', checkAuth, (request, response) => {
 
 app.patch('/api/v1/teams/:id', checkAuth, (request, response) => {
   const teamID = request.params.id;
-  const body = request.body;
+  const { city, name } = request.body;
+  const body = { city, name };
 
   database('teams').where('id', teamID).update(body, '*')
     .then(team => {
@@ -170,8 +172,9 @@ app.get('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
 });
 
 app.post('/api/v1/teams/:id/players', checkAuth, (request, response) => {
-  let player = request.body;
-  const id = request.params.id;
+  const { number, name, position, age, height, weight, experience, college } = request.body;
+  let player = { number, name, position, age, height, weight, experience, college };
+  const { id } = request.params;
 
   for (let requiredParameter of ['number', 'name', 'position', 'age', 'height', 'weight', 'experience', 'college']) {
     if (!player[requiredParameter]) {
@@ -190,13 +193,14 @@ app.post('/api/v1/teams/:id/players', checkAuth, (request, response) => {
   player = Object.assign({}, player, { team_id: id });
 
   database('players').insert(player, 'id')
-    .then(player => response.status(201).json({ player }))
+    .then(player => response.status(201).json({ id: player[0] }))
     .catch(error => response.status(500).json({ error }))
 });
 
 app.patch('/api/v1/teams/:teamID/players/:playerID', checkAuth, (request, response) => {
   const { teamID, playerID } = request.params;
-  const body = request.body;
+  const { number, name, position, age, height, weight, experience, college } = request.body;
+  const body = { number, name, position, age, height, weight, experience, college };
 
   database('players').where('id', playerID).update(body, '*')
     .then(player => {
