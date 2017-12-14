@@ -63,15 +63,20 @@ GET teams
   
 ```
 {
-  ARI: {
-    city: "arizona",
-    name: "cardinals"
-    players: [ ... ]
+ "teams": [
+  {
+   "id": 1702,
+   "city": "buffalo",
+   "name": "bills",
+   "created_at": "2017-12-12T21:25:15.635Z",
+   "updated_at": "2017-12-12T21:25:15.635Z"
   },
-  ATL: {
-    city: "atlanta",
-    name: "falcons",
-    players: [ ... ]
+  {
+   "id": 1705,
+   "city": "new york",
+   "name": "jets",
+   "created_at": "2017-12-12T21:25:15.653Z",
+   "updated_at": "2017-12-12T21:25:15.653Z"
   },
   ...
 }
