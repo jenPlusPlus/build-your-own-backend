@@ -63,7 +63,7 @@ app.get('/api/v1/teams', (request, response) => {
         if(!team.length){
           return response.status(404).json({ error: `Could not find any team associated with '${queryParameter}' of '${queryParameterValue}'` });
         }
-        return response.status(200).json({ team });
+        return response.status(200).json({ team: team[0] });
       })
       .catch(error => response.status(500).json({ error }));
   }
@@ -132,7 +132,7 @@ app.get('/api/v1/players', (request, response) => {
         if(!player.length){
           return response.status(404).json({ error: `Could not find any player associated with '${queryParameter}' of '${queryParameterValue}'` });
         }
-        return response.status(200).json({ player });
+        return response.status(200).json({ player: player[0] });
       })
       .catch(error => response.status(500).json({ error }));
   }
@@ -232,3 +232,5 @@ app.use(function (error, request, response, next) {
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}`);
 });
+
+module.exports = app;
