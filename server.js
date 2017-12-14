@@ -198,8 +198,14 @@ app.post('/api/v1/teams/:id/players', checkAuth, (request, response) => {
     .catch(error => response.status(500).json({ error }))
 });
 
+<<<<<<< HEAD
 app.patch('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
   const { teamID, playerID } = request.params;
+=======
+app.patch('/api/v1/teams/:teamID/players/:playerID', checkAuth, (request, response) => {
+  const teamID = request.params.teamID;
+  const playerID = request.params.playerID;
+>>>>>>> 424e8c7bcadf4dd1f004083c6ad889d45e5855aa
   const body = request.body;
 
   database('players').where('id', playerID).update(body, '*')
@@ -212,8 +218,14 @@ app.patch('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 })
 
+<<<<<<< HEAD
 app.delete('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
   const { teamID, playerID } = request.params;
+=======
+app.delete('/api/v1/teams/:teamID/players/:playerID', checkAuth, (request, response) => {
+  const teamID = request.params.teamID;
+  const playerID = request.params.playerID;
+>>>>>>> 424e8c7bcadf4dd1f004083c6ad889d45e5855aa
 
   database('players').where('id', playerID).del()
     .then(() => response.status(204).json({ playerID }))
