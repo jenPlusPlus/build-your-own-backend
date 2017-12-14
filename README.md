@@ -221,7 +221,7 @@ Returns all players as array of player objects via JSON.
 
 ##### Parameters
 
-| parameters | data type | description |
+| parameter | data type | description |
 |------------|-----------|-------------|
 | id         | integer   |             |
 | team_id    | integer   |             |
@@ -236,13 +236,31 @@ Returns all players as array of player objects via JSON.
 ##### Request
   
 ```
-PATCH teams/:id
+GET players 
 ```
   
 ##### Response
   
 ```
-{ response }
+{
+    "players": [
+        {
+            "id": 21641,
+            "team_id": 1703,
+            "number": 6,
+            "name": "Jay Cutler",
+            "position": "QB",
+            "age": 34,
+            "height": "6-3",
+            "weight": 231,
+            "experience": "12",
+            "college": "Vanderbilt",
+            "created_at": "2017-12-12T21:25:15.751Z",
+            "updated_at": "2017-12-12T21:25:15.751Z"
+        },
+        ...
+    ]
+}
 ```
 
 
