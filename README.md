@@ -84,6 +84,8 @@ GET teams
 
 ##### Error
 
+none
+
 *************************
 
 #### GET `teams/:id`
@@ -96,18 +98,22 @@ GET teams
 ##### Request
   
 ```
-GET teams/:id
+GET teams/1705
 ```
   
 ##### Response
   
 ```
 {
-  "ATL: {
-    "city": "atlanta",
-    "name": "falcons",
-    "players": [ ... ]
-  }
+  "team": [
+   {
+    "id": 1705,
+    "city": "new york",
+    "name": "jets",
+    "created_at": "2017-12-12T21:25:15.653Z",
+    "updated_at": "2017-12-12T21:25:15.653Z"
+   }
+  ]
 }
 ```
 
