@@ -32,13 +32,15 @@ const checkAuth = (request, response, next) => {
   }
 }
 
-app.post('/authenticate', (request, response) => {
+app.use(express.static(__dirname + '/public'));
+
+app.post('/api/v1/authenticate', (request, response) => {
   const { email, appName } = request.body;
 
   // rendundant check for required parameters
   for (let requiredParameter of ['email', 'appName']) {
     if (!request.body[requiredParameter]) {
-      return response.status(422).json({ error: `You are missing the '${requiredParameter}' property` });
+      return response.send(422).json({ error: `You are missing the '${requiredParameter}' property` });
     };
   };
 
