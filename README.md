@@ -268,6 +268,39 @@ GET players
 
 #### GET `players/:id`
 
+##### Description
+
+Returns one player with given unique id as object via JSON
+
+##### Request
+  
+```
+GET teams/22396
+```
+  
+##### Response
+  
+```
+{
+    "player": {
+        "id": 22396,
+        "team_id": 1712,
+        "number": 17,
+        "name": "Philip Rivers",
+        "position": "QB",
+        "age": 36,
+        "height": "6-5",
+        "weight": 228,
+        "experience": "14",
+        "college": "NC State",
+        "created_at": "2017-12-12T21:25:16.206Z",
+        "updated_at": "2017-12-12T21:25:16.206Z"
+    }
+}
+```
+
+****************
+
 #### GET `teams/:id/players`
 
 ##### Recognized Values
