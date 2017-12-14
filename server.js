@@ -16,12 +16,10 @@ app.get('/', (request, response) => {
   response.send('it works!!');
 });
 
-// team resources
-
 app.get('/api/v1/teams', (request, response) => {
   const queryParameter = Object.keys(request.query)[0];
   const queryParameterValue = request.query[queryParameter];
-
+  
   if (!queryParameter) {
     database('teams').select()
       .then(teams => response.status(200).json({ teams }))
@@ -38,7 +36,54 @@ app.get('/api/v1/teams', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
-// player resources
+app.get('/api/v1/teams/:id', (request, response) => {
+  database('teams').where('id', request.params.id).select()
+    .then(team => {
+      if(team.length){
+        return response.status(200).json({ team });
+      }
+      return response.status(404).json({ error: `Could not find any team associated with id ${request.params.id}` });
+    })
+    .catch(error => response.status(500).json({ error }));
+});
+
+app.post('/api/v1/teams', (request, response) => {
+  let team = request.body;
+
+  for (let requiredParameter of ['city', 'name']) {
+    if (!team[requiredParameter]) {
+      return response.status(422).json({ error: `You are missing the '${requiredParameter}' property` });
+    };
+  };
+
+  database('teams').insert(team, 'id')
+    .then(team => response.status(201).json({ team }))
+    .catch(error => response.status(500).json({ error }))
+});
+
+app.patch('/api/v1/teams/:id', (request, response) => {
+  const teamID = request.params.id;
+  const body = request.body;
+
+  database('teams').where('id', teamID).update(body, '*')
+    .then(team => {
+      if (!team.length) {
+        return response.status(404).json({ error: `Could not find any team associated with team_id ${request.params.id}` });
+      }
+      return response.status(202).json({ team: team[0] });
+    })
+    .catch(error => response.status(500).json({ error }));
+})
+
+app.delete('/api/v1/teams/:id', (request, response) => {
+  const teamID = request.params.id;
+
+  database('teams').where('id', teamID).del()
+    .then(() => {
+      return response.status(204).json({ teamID });
+    })
+    .catch(error => response.status(404).json({error: `Could not find team with id '${teamID}'`}));
+});
 
 app.get('/api/v1/players', (request, response) => {
   const queryParameter = Object.keys(request.query)[0];
@@ -100,7 +145,7 @@ app.post('/api/v1/teams/:id/players', (request, response) => {
   for (let requiredParameter of ['number', 'name', 'position', 'age', 'height', 'weight', 'experience', 'college']) {
     if (!player[requiredParameter]) {
       return response.status(422).json({ error: `You are missing the '${requiredParameter}' property` });
-    }; 
+    };
   };
 
   if(player.number < 0){
@@ -142,8 +187,6 @@ app.delete('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
     .catch(error => response.status(404).json({error: `Could not find player with id '${playerID}'`}));
 });
 
-// generic errors
-
 app.use(function (request, response, next) {
   response.status(404).send("404: Sorry can't find that!")
 });
@@ -155,4 +198,4 @@ app.use(function (error, request, response, next) {
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}`);
-})
+});
