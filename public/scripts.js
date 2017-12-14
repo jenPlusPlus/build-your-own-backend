@@ -1,4 +1,3 @@
-/* eslint-disable */
 // /* eslint no-plusplus: 0 */
 // /* eslint no-console: 0 */
 
