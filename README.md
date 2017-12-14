@@ -193,9 +193,9 @@ body: {
   
 #### DELETE `teams/:id`
 
-##### Recognized Values
-* Bullet 1
-* Bullet 2
+##### Description
+
+Remove team from database and server returns HTTP status code`204: No Content`
 
 ##### Request
   
@@ -206,7 +206,7 @@ DELETE teams/:id
 ##### Response
   
 ```
-{ response }
+// no JSON response
 ```
 
 *************
