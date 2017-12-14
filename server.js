@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'BYOB';
@@ -19,7 +21,7 @@ app.get('/', (request, response) => {
 app.get('/api/v1/teams', (request, response) => {
   const queryParameter = Object.keys(request.query)[0];
   const queryParameterValue = request.query[queryParameter];
-  
+
   if (!queryParameter) {
     database('teams').select()
       .then(teams => response.status(200).json({ teams }))
