@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 app.set('port', process.env.PORT || 3000);
+app.set('secretKey', process.env.SECRET_KEY);
+
 app.locals.title = 'BYOB';
 
 app.use(bodyParser.json());
@@ -12,14 +16,43 @@ const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 
-app.get('/', (request, response) => {
-  response.send('it works!!');
+const checkAuth = (request, response, next) => {
+  const token = request.body.token || request.query.token || request.headers['x-access-token'];
+
+  if(!token) {
+    return response.status(403).json({error: 'You must be authorized to access this endpoint.'});
+  } else {
+    const verified = jwt.verify(token, app.get('secretKey'))
+
+    if (verified.admin) {
+      next();
+    } else {
+      return response.status(403).json({error: 'You must be authorized to access this endpoint.'})
+    }
+  }
+}
+
+app.use(express.static(__dirname + '/public'));
+
+app.post('/api/v1/authenticate', (request, response) => {
+  const { email, appName } = request.body;
+
+  // rendundant check for required parameters
+  for (let requiredParameter of ['email', 'appName']) {
+    if (!request.body[requiredParameter]) {
+      return response.send(422).json({ error: `You are missing the '${requiredParameter}' property` });
+    };
+  };
+
+  const admin = email.endsWith('@turing.io');
+  const token = jwt.sign({ admin }, app.get('secretKey'));
+  return response.status(200).json({ token });
 });
 
 app.get('/api/v1/teams', (request, response) => {
   const queryParameter = Object.keys(request.query)[0];
   const queryParameterValue = request.query[queryParameter];
-  
+
   if (!queryParameter) {
     database('teams').select()
       .then(teams => response.status(200).json({ teams }))
@@ -47,7 +80,7 @@ app.get('/api/v1/teams/:id', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
-app.post('/api/v1/teams', (request, response) => {
+app.post('/api/v1/teams', checkAuth, (request, response) => {
   let team = request.body;
 
   for (let requiredParameter of ['city', 'name']) {
@@ -61,7 +94,7 @@ app.post('/api/v1/teams', (request, response) => {
     .catch(error => response.status(500).json({ error }))
 });
 
-app.patch('/api/v1/teams/:id', (request, response) => {
+app.patch('/api/v1/teams/:id', checkAuth, (request, response) => {
   const teamID = request.params.id;
   const body = request.body;
 
@@ -75,7 +108,7 @@ app.patch('/api/v1/teams/:id', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 })
 
-app.delete('/api/v1/teams/:id', (request, response) => {
+app.delete('/api/v1/teams/:id', checkAuth, (request, response) => {
   const teamID = request.params.id;
 
   database('teams').where('id', teamID).del()
@@ -136,7 +169,7 @@ app.get('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
-app.post('/api/v1/teams/:id/players', (request, response) => {
+app.post('/api/v1/teams/:id/players', checkAuth, (request, response) => {
   let player = request.body;
   const id = request.params.id;
 
@@ -161,7 +194,7 @@ app.post('/api/v1/teams/:id/players', (request, response) => {
     .catch(error => response.status(500).json({ error }))
 });
 
-app.patch('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
+app.patch('/api/v1/teams/:teamID/players/:playerID', checkAuth, (request, response) => {
   const { teamID, playerID } = request.params;
   const body = request.body;
 
@@ -175,7 +208,7 @@ app.patch('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 })
 
-app.delete('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
+app.delete('/api/v1/teams/:teamID/players/:playerID', checkAuth, (request, response) => {
   const { teamID, playerID } = request.params;
 
   database('players').where('id', playerID).del()
