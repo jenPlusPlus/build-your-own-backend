@@ -89,7 +89,6 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.post('/api/v1/authenticate', (request, response) => {
   const { email } = request.body;
 
-  // rendundant check for required parameters
   for (const requiredParameter of ['email', 'appName']) {
     if (!request.body[requiredParameter]) {
       return response.send(422).json({ error: `You are missing the '${requiredParameter}' property` });
