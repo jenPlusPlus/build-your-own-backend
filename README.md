@@ -20,19 +20,19 @@ This API is [REST](https://en.wikipedia.org/wiki/Representational_state_transfer
 
 * [Endpoints](#endpoints)
   * [Team Resources](#team-resources)
-    * [`GET` teams](#get-teams)
-    * [`GET` teams/:id](#get-'teams/:id')
-    * [`POST` teams](#post-teams)
-    * [`PATCH` teams/:id](#patch-teams/:id)
-    * [`DELETE` teams/:id](#delete-teams/:id)
+    * `GET` teams
+    * `GET` teams/:id
+    * `POST` teams
+    * `PATCH` teams/:id
+    * `DELETE` teams/:id
   * [Player Resources](#player-resources)
-    * [`GET` players](#players)
-    * [`GET` teams/:id/players](#get-teams/:id/players)
-    * [`GET` players/:id](#get-players/:id)
-    * [`GET` teams/:teamID/players/:playerID](#get-teams/:id/players/:id)
-    * [`POST` teams/:id/players](#post-teams/:id/players)
-    * [`PATCH` teams/:teamID/players/:playerID](#patch-teams/:teamID/players/:playerID)
-    * [`DELETE` teams/:teamID/players/playerID](#delete-teams/:teamID/players/:playerID)
+    * `GET` players
+    * `GET` teams/:id/players
+    * `GET` players/:id
+    * `GET` teams/:teamID/players/:playerID
+    * `POST` teams/:id/players
+    * `PATCH` teams/:teamID/players/:playerID
+    * `DELETE` teams/:teamID/players/playerID
 * [Contributors](#contributors)
     
 **************
