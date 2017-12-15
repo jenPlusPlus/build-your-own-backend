@@ -137,8 +137,8 @@ Create a new team and returns the id of the created team as integer via JSON.
 
 | parameter  | data type | description |
 |------------|-----------|-------------|
-| city       | string    |             |
-| name       | string    |             |
+| city       | string    | team city   |
+| name       | string    | team name   |
 
 ##### Request
   
