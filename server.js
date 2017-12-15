@@ -21,6 +21,17 @@ const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 
+const cleanTeams = (request, response, next) => {
+  if (request.body.city) {
+    request.body.city = request.body.city.toLowerCase();
+  }
+  if (request.body.name) {
+    request.body.name = request.body.name.toLowerCase();
+  }
+  next();
+};
+
+
 const checkAuth = (request, response, next) => {
   const token = request.body.token || request.query.token || request.headers['x-access-token'];
 
@@ -63,7 +74,7 @@ app.get('/api/v1/teams', (request, response) => {
       .then(teams => response.status(200).json({ teams }))
       .catch(error => response.status(500).json({ error }));
   } else {
-    database('teams').where(queryParameter, queryParameterValue).select()
+    database('teams').where(queryParameter.toLowerCase(), queryParameterValue.toLowerCase()).select()
       .then((team) => {
         if (!team.length) {
           return response.status(404).json({ error: `Could not find any team associated with '${queryParameter}' of '${queryParameterValue}'` });
@@ -85,7 +96,7 @@ app.get('/api/v1/teams/:id', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
-app.post('/api/v1/teams', checkAuth, (request, response) => {
+app.post('/api/v1/teams', checkAuth, cleanTeams, (request, response) => {
   const { name, city } = request.body;
   const team = { name, city };
 
@@ -102,7 +113,7 @@ app.post('/api/v1/teams', checkAuth, (request, response) => {
   return null;
 });
 
-app.patch('/api/v1/teams/:id', checkAuth, (request, response) => {
+app.patch('/api/v1/teams/:id', checkAuth, cleanTeams, (request, response) => {
   const teamID = request.params.id;
   const { city, name } = request.body;
   const body = { city, name };
