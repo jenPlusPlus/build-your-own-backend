@@ -100,9 +100,9 @@ Returns one team with given unique id as an object as JSON.
 
 | parameters | data type | description |
 |------------|-----------|-------------|
-| id         | integer   |             |
-| city       | string    |             |
-| name       | string    |             |
+| id         | integer   | unique id of team            |
+| city       | string    | team city            |
+| name       | string    | team nickname            |
   
 ##### Request
   
