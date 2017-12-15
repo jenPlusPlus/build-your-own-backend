@@ -131,9 +131,9 @@ GET teams/1705
 
 ##### Description
 
-**MUST BE AUTHORIZED TO USE THIS ENDPOINT**
-
 Create a new team and returns the id of the created team as integer via JSON.
+
+* MUST BE AUTHORIZED TO USE THIS ENDPOINT
 
 ##### Essential Information:
 
