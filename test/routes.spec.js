@@ -290,7 +290,7 @@ describe('API Routes', () => {
         })
         .catch((error) => { throw error; }));
 
-    it('should return a 422 if a number is taken by a teammate', () =>
+    it.skip('should return a 422 if a number is taken by a teammate', () =>
       chai.request(server)
         .post('/api/v1/teams/7/players')
         .send({
