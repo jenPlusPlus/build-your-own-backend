@@ -435,7 +435,7 @@ PATCH teams/:id
 ##### Request
   
 ```
-POST teams/:id/players
+POST teams/17/players
 ```
   
 ##### Response
@@ -443,7 +443,7 @@ POST teams/:id/players
 ```
 {
  team: {
-  id: 134,
+  id: 11347,
  }
 }
 ```
@@ -461,7 +461,7 @@ Remove team with given unique id and responds with HTTP 204.
 ##### Request
   
 ```
-DELETE teams/:id
+DELETE teams/17/players/34875
 ```
   
 ##### Response
