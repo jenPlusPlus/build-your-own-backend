@@ -441,7 +441,11 @@ POST teams/:id/players
 ##### Response
   
 ```
-{ response }
+{
+ team: {
+  id: 134,
+ }
+}
 ```
 
 ***************
