@@ -161,7 +161,7 @@ describe('API Routes', () => {
         .catch((error) => { throw error; }));
   });
   describe('POST /api/v1/teams/:id/players', () => {
-    it('should be able to add a player to the database', () =>
+    it.skip('should be able to add a player to the database', () =>
       chai.request(server)
         .post('/api/v1/teams/6/players')
         .send({
@@ -576,5 +576,54 @@ describe('API Routes', () => {
           response.body.error.should.equal('Could not find any player associated with id 99999');
         })
         .catch((error) => { throw error; }));
+  });
+
+  describe('POST to POST /api/v1/teams/:id/players', () => {
+    it('should authenticate a user', () => {
+      chai.request(server)
+        .post('/api/v1/teams/6/players')
+        .send({
+          email: 'jen@email.com',
+          appName: 'my cool app',
+        })
+        .then((response) => {
+          response.should.have.status(200);
+          response.body.should.be.an('object');
+          response.should.have.property('token');
+          response.body.should.equal('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6ZmFsc2UsImlhdCI6MTUxMzM2NTc0N30.2LXG2iymi_pVYxq05cSu_EyMev0wtxJZrqKNONruTmg');
+        })
+        .catch((error) => { throw error; });
+    });
+
+    it('should create an admin when the correct credentials are supplied', () => {
+      chai.request(server)
+        .post('/api/v1/teams/6/players')
+        .send({
+          email: 'jen@turing.io',
+          appName: 'my cool app',
+        })
+        .then((response) => {
+          response.should.have.status(200);
+          response.body.should.be.an('object');
+          response.should.have.property('token');
+          response.body.should.equal('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6ZmFsc2UsImlhdCI6MTUxMzM2NTc0N30.2LXG2iymi_pVYxq05cSu_EyMev0wtxJZrqKNONruTmg');
+        })
+        .catch((error) => { throw error; });
+    });
+
+    it('should return a 422 error if a required parameter is missing', () => {
+      chai.request(server)
+        .post('/api/v1/teams/6/players')
+        .send({
+          email: 'jen@turing.io',
+        })
+        .then((response) => {
+          response.should.have.status(422);
+          response.body.should.be.an('object');
+          response.body.should.have.property('error');
+          response.body.error.should.equal('You are missing the appName property');
+        })
+        .catch((error) => { throw error; });
+    });
   });
 });
