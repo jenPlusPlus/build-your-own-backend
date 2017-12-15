@@ -409,13 +409,28 @@ Returns one player with given unique id from one team with given unique id as ob
 ##### Request
   
 ```
-PATCH teams/:id
+GET teams/1/players/22396
 ```
   
 ##### Response
   
 ```
-{ response }
+{
+    "player": {
+        "id": 22396,
+        "team_id": 1712,
+        "number": 17,
+        "name": "Philip Rivers",
+        "position": "QB",
+        "age": 36,
+        "height": "6-5",
+        "weight": 228,
+        "experience": "14",
+        "college": "NC State",
+        "created_at": "2017-12-12T21:25:16.206Z",
+        "updated_at": "2017-12-12T21:25:16.206Z"
+    }
+}
 ```
 
 *********
