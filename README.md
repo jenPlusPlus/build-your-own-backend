@@ -84,7 +84,7 @@ GET teams
 }
 ```
 
-##### Error
+##### Errors
 
 none
 
@@ -125,6 +125,10 @@ GET teams/1705
 }
 ```
 
+##### Errrors 
+
+* 404: Team does not exist with given unique id
+
 ****************
   
 #### POST `teams`
@@ -163,8 +167,8 @@ body: {
 
 ##### Errors
 
-* 403: Not authorized. You must have JSON Web Token to access this endpoint.
-* 422: Unprocessible Entity - 
+* 403: Not authorized - You must have JSON Web Token to access this endpoint.
+* 422: Unprocessible Entity - Invalid parameter or parameter value within post body.
 
 ****************
   
@@ -206,6 +210,12 @@ body: {
     }
 }
 ```
+
+##### Errors
+
+* 403: Not authorized - You must generate and include a valid JSON Web Token to access this endpoint.
+* 404: Team does not exist with given unique id
+* 422: Unprocessible Entity - Invalid parameter or parameter value within post body.
 
 ***************
   
