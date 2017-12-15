@@ -355,7 +355,7 @@ PATCH teams/:id
 
 ##### Description
 
-
+Returns one player with given unique id from one team with given unique id as object via JSON.
 
 ##### Recognized Values
 
