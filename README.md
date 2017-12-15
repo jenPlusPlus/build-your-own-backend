@@ -169,6 +169,8 @@ body: {
 
 Edit team name and city by passing JSON and returns edited team as object via JSON. 
 
+* MUST BE AUTHORIZED TO USE THIS ENDPOINT
+
 ##### Potential Information: 
 
 | parameter  | data type | description |
@@ -206,7 +208,9 @@ body: {
 
 ##### Description
 
-Remove team from database and server returns HTTP status code`204: No Content`
+Remove team from database and server returns HTTP status code`204: No Content`.
+
+* MUST BE AUTHORIZED TO USE THIS ENDPOINT
 
 ##### Request
   
@@ -346,6 +350,8 @@ PATCH teams/:id
 
 ##### Description
 
+
+
 ##### Recognized Values
 
 | parameter | data type | description |
@@ -378,6 +384,8 @@ PATCH teams/:id
 
 ##### Description
 
+* MUST BE AUTHORIZED TO USE THIS ENDPOINT
+
 ##### Recognized Values
 
 | parameter | data type | description |
@@ -407,6 +415,10 @@ PATCH teams/:id
 **************
 
 #### POST `teams/:id/players`
+
+##### Description
+
+* MUST BE AUTHORIZED TO USE THIS ENDPOINT
 
 ##### Recognized Values
 
@@ -440,6 +452,10 @@ PATCH teams/:id
 
 ##### Description
 
+Remove team with given unique id and responds with HTTP 204.
+
+* MUST BE AUTHORIZED TO USE THIS ENDPOINT
+
 ##### Request
   
 ```
@@ -449,7 +465,7 @@ PATCH teams/:id
 ##### Response
   
 ```
-{ response }
+{ // no json response }
 ```
 
 **************
