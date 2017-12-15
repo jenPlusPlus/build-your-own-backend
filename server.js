@@ -41,6 +41,15 @@ const cleanPlayer = (request, response, next) => {
     });
   };
 
+  const checkEmptyString = (stringProperties) => {
+    stringProperties.forEach((stringProperty) => {
+      if (request.body[Object.keys(stringProperty)[0]] === '') {
+        return response.status(422).json({ error: `${Object.keys(stringProperty)[0]} cannot be an empty string.` });
+      }
+      return null;
+    });
+  };
+
   const checkUniqueNumber = (number) => {
     database('players').where('number', number).select()
       .then((numberInUse) => {
@@ -62,6 +71,12 @@ const cleanPlayer = (request, response, next) => {
     { number: request.body.number },
     { age: request.body.age },
     { weight: request.body.weight }]);
+  checkEmptyString([
+    { name: request.body.name },
+    { position: request.body.position },
+    { height: request.body.height },
+    { experience: request.body.experience },
+    { college: request.body.college }]);
   checkUniqueNumber(request.body.number);
   checkPosition(request.body.position);
   next();
