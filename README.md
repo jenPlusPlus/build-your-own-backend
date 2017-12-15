@@ -390,15 +390,13 @@ PATCH teams/:id
 
 | parameter | data type | description |
 |------------|-----------|-------------|
-| id         | integer   |             |
-| team_id    | integer   |             |
-| name       | string    |             |
-| position   | string    |             |
-| age        | number    |             |
-| height     | string    |             |
-| weight     | integer   |             |
-| experience | string    |             |
-| college    | string    |             |
+| name       | string    | player name, first and last. e.g. "John Wolfe" |
+| position   | string    | player position, e.g. "QB", "RB", "SS"            |
+| age        | number    | player age, e.g. 34            |
+| height     | string    | player height, e.g. "6-5"            |
+| weight     | integer   | player weight, e.g. 285            |
+| experience | string    | player's number of years in the legaue, R denotes rookie. e.g. '7', 'R'            |
+| college    | string    | player college, e.g. 'NC State'            |
 
 ##### Request
   
