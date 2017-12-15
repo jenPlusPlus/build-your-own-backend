@@ -384,6 +384,10 @@ GET teams/17/players
 }
 ```
 
+##### Errors
+
+* 404: Team not found - no team associated with supplied unique ID.
+
 *********
   
 #### GET `teams/:id/players/:id`
@@ -432,6 +436,10 @@ GET teams/1/players/22396
     }
 }
 ```
+
+##### Errors 
+
+* 404: Team / Player not found - no team / player associated with supplied unique IDs.
 
 *********
 
