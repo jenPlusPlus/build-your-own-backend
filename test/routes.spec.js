@@ -182,7 +182,7 @@ describe('API Routes', () => {
         })
         .catch((error) => { throw error; }));
 
-    it('should return a 422 if a property is not present', () =>
+    it.skip('should return a 422 if a property is not present', () =>
       chai.request(server)
         .post('/api/v1/teams/7/players')
         .send({
@@ -578,10 +578,10 @@ describe('API Routes', () => {
         .catch((error) => { throw error; }));
   });
 
-  describe('POST to POST /api/v1/teams/:id/players', () => {
+  describe('POST to /api/v1/authenticate', () => {
     it('should authenticate a user', () => {
       chai.request(server)
-        .post('/api/v1/teams/6/players')
+        .post('/api/v1/authenticate')
         .send({
           email: 'jen@email.com',
           appName: 'my cool app',
