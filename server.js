@@ -21,7 +21,7 @@ const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 
-const cleanTeams = (request, response, next) => {
+const cleanTeam = (request, response, next) => {
   if (request.body.city) {
     request.body.city = request.body.city.toLowerCase();
   }
@@ -31,6 +31,42 @@ const cleanTeams = (request, response, next) => {
   next();
 };
 
+const cleanPlayer = (request, response, next) => {
+  const checkPositives = (numericalProperties) => {
+    numericalProperties.forEach((numericalProperty) => {
+      if (request.body[Object.keys(numericalProperty)[0]] < 0) {
+        return response.status(422).json({ error: `${Object.keys(numericalProperty)[0]} must be a positive number` });
+      }
+      return null;
+    });
+  };
+
+  const checkUniqueNumber = (number) => {
+    database('players').where('number', number).select()
+      .then((numberInUse) => {
+        if (numberInUse.length) {
+          return response.status(422).json({ error: `Player number ${number} is already in use.` });
+        }
+        return null;
+      });
+  };
+
+  const checkPosition = (position) => {
+    if (position.length < 1 || position.length > 2) {
+      return response.status(422).json({ error: 'Invalid position. position must be between 1 and 2 characters in length.' });
+    }
+    return null;
+  };
+
+  checkPositives([
+    { number: request.body.number },
+    { age: request.body.age },
+    { weight: request.body.weight }]);
+  checkUniqueNumber(request.body.number);
+  checkPosition(request.body.position);
+  next();
+  return null;
+};
 
 const checkAuth = (request, response, next) => {
   const token = request.body.token || request.query.token || request.headers['x-access-token'];
@@ -96,7 +132,7 @@ app.get('/api/v1/teams/:id', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
-app.post('/api/v1/teams', checkAuth, cleanTeams, (request, response) => {
+app.post('/api/v1/teams', checkAuth, cleanTeam, (request, response) => {
   const { name, city } = request.body;
   const team = { name, city };
 
@@ -113,7 +149,7 @@ app.post('/api/v1/teams', checkAuth, cleanTeams, (request, response) => {
   return null;
 });
 
-app.patch('/api/v1/teams/:id', checkAuth, cleanTeams, (request, response) => {
+app.patch('/api/v1/teams/:id', checkAuth, cleanTeam, (request, response) => {
   const teamID = request.params.id;
   const { city, name } = request.body;
   const body = { city, name };
@@ -145,7 +181,7 @@ app.get('/api/v1/players', (request, response) => {
       .then(players => response.status(200).json({ players }))
       .catch(error => response.status(500).json({ error }));
   } else {
-    database('players').where(queryParameter, queryParameterValue).select()
+    database('players').where(queryParameter.toLowerCase(), queryParameterValue.toLowerCase()).select()
       .then((player) => {
         if (!player.length) {
           return response.status(404).json({ error: `Could not find any player associated with '${queryParameter}' of '${queryParameterValue}'` });
@@ -189,12 +225,12 @@ app.get('/api/v1/teams/:teamID/players/:playerID', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
-app.post('/api/v1/teams/:id/players', checkAuth, (request, response) => {
+app.post('/api/v1/teams/:id/players', checkAuth, cleanPlayer, (request, response) => {
   const {
     number, name, position, age, height, weight, experience, college,
   } = request.body;
   let player = {
-    number, name, position, age, height, weight, experience, college,
+    number, name, position: position.toUpperCase(), age, height, weight, experience, college,
   };
   const { id } = request.params;
 
@@ -203,17 +239,7 @@ app.post('/api/v1/teams/:id/players', checkAuth, (request, response) => {
       return response.status(422).json({ error: `You are missing the '${requiredParameter}' property` });
     }
   }
-
-  if (player.number < 0) {
-    return response.status(422).json({ error: 'number must be a positive number' });
-  } else if (player.age < 0) {
-    return response.status(422).json({ error: 'age must be a positive number' });
-  } else if (player.weight < 0) {
-    return response.status(422).json({ error: 'weight must be a positive number' });
-  }
-
   player = Object.assign({}, player, { team_id: id });
-
   database('players').insert(player, 'id')
     .then(insertedPlayer => response.status(201).json({ id: insertedPlayer[0] }))
     .catch(error => response.status(500).json({ error }));
@@ -221,7 +247,7 @@ app.post('/api/v1/teams/:id/players', checkAuth, (request, response) => {
   return null;
 });
 
-app.patch('/api/v1/teams/:teamID/players/:playerID', checkAuth, (request, response) => {
+app.patch('/api/v1/teams/:teamID/players/:playerID', checkAuth, cleanPlayer, (request, response) => {
   const { playerID } = request.params;
   const {
     number, name, position, age, height, weight, experience, college,
