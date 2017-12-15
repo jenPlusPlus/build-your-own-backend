@@ -22,12 +22,24 @@ const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 
 const cleanTeam = (request, response, next) => {
+  const checkEmptyString = (stringProperties) => {
+    stringProperties.forEach((stringProperty) => {
+      if (request.body[Object.keys(stringProperty)[0]] === '') {
+        return response.status(422).json({ error: `${Object.keys(stringProperty)[0]} cannot be an empty string.` });
+      }
+      return null;
+    });
+  };
   if (request.body.city) {
     request.body.city = request.body.city.toLowerCase();
   }
   if (request.body.name) {
     request.body.name = request.body.name.toLowerCase();
   }
+  checkEmptyString([
+    { name: request.body.name },
+    { city: request.body.city },
+  ]);
   next();
 };
 
