@@ -563,6 +563,11 @@ DELETE teams/17/players/34875
 { // no json response }
 ```
 
+##### Errors
+
+* 403: Not authorized. You must have JSON Web Token to access this endpoint.
+* 404: Team / player not found - no team /player associated with supplied unique ID.
+
 **************
 
 #### Contributors:
