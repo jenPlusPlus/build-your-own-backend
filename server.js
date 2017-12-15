@@ -1,5 +1,6 @@
 /* eslint no-restricted-syntax: 0 */
 /* eslint no-console: 0 */
+/* eslint no-plusplus: 0 */
 
 const express = require('express');
 const path = require('path');
@@ -45,12 +46,12 @@ const cleanTeam = (request, response, next) => {
 
 const cleanPlayer = (request, response, next) => {
   const checkPositives = (numericalProperties) => {
-    numericalProperties.forEach((numericalProperty) => {
-      if (request.body[Object.keys(numericalProperty)[0]] < 0) {
-        return response.status(422).json({ error: `${Object.keys(numericalProperty)[0]} must be a positive number` });
+    for (let iter = 0; iter < numericalProperties.length; iter++) {
+      if (numericalProperties[iter][Object.keys(numericalProperties[iter])[0]] < 0) {
+        return response.status(422).json({ error: `${Object.keys(numericalProperties[iter])[0]} must be a positive number` });
       }
-      return null;
-    });
+    }
+    return null;
   };
 
   const checkEmptyString = (stringProperties) => {
@@ -73,6 +74,9 @@ const cleanPlayer = (request, response, next) => {
   };
 
   const checkPosition = (position) => {
+    if (!position) {
+      return response.status(422).json({ error: "You are missing the 'position' property" });
+    }
     if (position.length < 1 || position.length > 2) {
       return response.status(422).json({ error: 'Invalid position. position must be between 1 and 2 characters in length.' });
     }
@@ -207,12 +211,12 @@ app.get('/api/v1/players', (request, response) => {
       .then(players => response.status(200).json({ players }))
       .catch(error => response.status(500).json({ error }));
   } else {
-    database('players').where(queryParameter.toLowerCase(), queryParameterValue.toLowerCase()).select()
-      .then((player) => {
-        if (!player.length) {
+    database('players').where(queryParameter.toLowerCase(), queryParameterValue).select()
+      .then((players) => {
+        if (!players.length) {
           return response.status(404).json({ error: `Could not find any player associated with '${queryParameter}' of '${queryParameterValue}'` });
         }
-        return response.status(200).json({ player: player[0] });
+        return response.status(200).json({ players });
       })
       .catch(error => response.status(500).json({ error }));
   }
