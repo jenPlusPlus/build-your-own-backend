@@ -184,8 +184,9 @@ Edit team name and city by passing JSON and returns edited team as object via JS
 
 | parameter  | data type | description |
 |------------|-----------|-------------|
-| city       | string    |             |
-| name       | string    |             |
+| city       | string    | team city; e.g. "raleigh"   |
+| name       | string    | team name; e.g. "robots"  |
+
 
 ##### Request
   
@@ -223,14 +224,14 @@ body: {
 
 ##### Description
 
-Remove team from database and server returns HTTP status code`204: No Content`.
+Remove team from database and server returns HTTP status code `204: No Content`.
 
 * MUST BE AUTHORIZED TO USE THIS ENDPOINT
 
 ##### Request
   
 ```
-DELETE teams/:1708
+DELETE teams/1708
 ```
   
 ##### Response
@@ -238,6 +239,11 @@ DELETE teams/:1708
 ```
 // no JSON response
 ```
+
+##### Errors
+
+* 403: Not authorized - You must generate and include a valid JSON Web Token to access this endpoint.
+* 404: Team does not exist with given unique id
 
 *************
 
