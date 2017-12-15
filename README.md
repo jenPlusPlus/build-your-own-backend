@@ -448,6 +448,12 @@ POST teams/17/players
 }
 ```
 
+##### Errors
+
+* 403: Not authorized. You must have JSON Web Token to access this endpoint.
+* 404: Team not found - no team associated with supplied unique ID.
+
+
 ***************
 
 #### DELETE `teams/:id/players/:id`
