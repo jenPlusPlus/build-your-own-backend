@@ -51,9 +51,9 @@ Returns all teams as objects in `teams` array as JSON.
 
 | parameters | data type | description |
 |------------|-----------|-------------|
-| id         | integer   |             |
-| city       | string    |             |
-| name       | string    |             |
+| id         | integer   | unique id of team            |
+| city       | string    | team city            |
+| name       | string    | team nickname            |
   
 ##### Request
   
