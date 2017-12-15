@@ -402,19 +402,45 @@ PATCH teams/:id
   
 ```
 PATCH teams/:id
+
+patch body: {
+ token: 'JWT token string'
+}
 ```
   
 ##### Response
   
 ```
-{ response }
+{
+    "player": {
+        "id": 22396,
+        "team_id": 1712,
+        "number": 17,
+        "name": "Philip Rivers",
+        "position": "QB",
+        "age": 36,
+        "height": "6-5",
+        "weight": 228,
+        "experience": "14",
+        "college": "NC State",
+        "created_at": "2017-12-12T21:25:16.206Z",
+        "updated_at": "2017-12-12T21:25:16.206Z"
+    }
+}
 ```
+
+##### Errors 
+
+* 403: Not authorized. You must have JSON Web Token to access this endpoint.
+
 
 **************
 
 #### POST `teams/:id/players`
 
 ##### Description
+
+Create a player with a team_id of the given unique team id in the URL
 
 * MUST BE AUTHORIZED TO USE THIS ENDPOINT
 
